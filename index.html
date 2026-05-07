@@ -35,92 +35,10 @@
   .header h1{font-size:26px;font-weight:800;color:#92400e;letter-spacing:-.5px;margin-bottom:6px}
   .header p{font-size:15px;color:#b45309;opacity:.85;max-width:340px;margin:0 auto}
 
-  /* ── FREE TRIAL HERO ── */
-  .free-hero{
-    max-width:440px;margin:24px auto 0;padding:0 16px;
-  }
-  .free-card{
-    background:linear-gradient(135deg,#065f46,#047857);
-    border-radius:24px;
-    padding:28px 24px;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 8px 32px rgba(4,120,87,.35);
-  }
-  .free-card::before{
-    content:'';position:absolute;
-    top:-40px;right:-40px;
-    width:140px;height:140px;
-    background:rgba(255,255,255,.06);
-    border-radius:50%;
-  }
-  .free-card::after{
-    content:'';position:absolute;
-    bottom:-30px;left:-30px;
-    width:100px;height:100px;
-    background:rgba(255,255,255,.04);
-    border-radius:50%;
-  }
-  .free-badge{
-    display:inline-flex;align-items:center;gap:6px;
-    background:rgba(255,255,255,.15);
-    color:#fff;font-size:11px;font-weight:700;
-    padding:4px 12px;border-radius:99px;
-    margin-bottom:14px;letter-spacing:.5px;text-transform:uppercase;
-  }
-  .free-card h2{
-    font-size:28px;font-weight:800;color:#fff;
-    margin-bottom:6px;letter-spacing:-.5px;
-  }
-  .free-card h2 span{color:#6ee7b7}
-  .free-card p{
-    font-size:14px;color:rgba(255,255,255,.75);
-    line-height:1.5;margin-bottom:22px;
-  }
-  .free-features{
-    list-style:none;
-    text-align:left;
-    margin-bottom:22px;
-  }
-  .free-features li{
-    display:flex;align-items:center;gap:10px;
-    font-size:13.5px;color:rgba(255,255,255,.9);
-    padding:5px 0;
-  }
-  .free-features li .fcheck{
-    width:20px;height:20px;border-radius:50%;
-    background:rgba(110,231,183,.25);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;font-size:11px;color:#6ee7b7;
-  }
-  .btn-free{
-    width:100%;padding:16px;border-radius:14px;border:none;
-    font-size:16px;font-weight:800;cursor:pointer;
-    background:#fff;color:#065f46;
-    display:flex;align-items:center;justify-content:center;gap:8px;
-    box-shadow:0 4px 20px rgba(0,0,0,.2);
-    transition:transform .15s,box-shadow .15s;
-    text-decoration:none;
-  }
-  .btn-free:active{transform:scale(.98)}
-  .btn-free-sub{
-    display:block;font-size:11px;font-weight:500;
-    color:rgba(6,95,70,.65);margin-top:2px;
-  }
-
-  /* ── Divisor ── */
-  .divider{
-    max-width:440px;margin:24px auto 0;padding:0 16px;
-    display:flex;align-items:center;gap:12px;
-  }
-  .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(180,83,9,.2)}
-  .divider span{font-size:12px;color:#b45309;font-weight:600;white-space:nowrap;opacity:.7}
-
   /* ── Cards container ── */
   .plans{
     display:flex;flex-direction:column;gap:14px;
-    max-width:440px;margin:16px auto 0;padding:0 16px;
+    max-width:440px;margin:28px auto 0;padding:0 16px;
   }
 
   /* ── Plan card ── */
@@ -244,28 +162,6 @@
   <p>Orações católicas personalizadas todo dia, direto no seu WhatsApp 🙏</p>
 </div>
 
-<!-- ── FREE TRIAL HERO ── -->
-<div class="free-hero">
-  <div class="free-card">
-    <div class="free-badge">🎁 Mais popular</div>
-    <h2>7 dias <span>gratuitos</span></h2>
-    <p>Receba orações personalizadas todo dia às 6h. Sem cartão de crédito. Cancele quando quiser.</p>
-    <ul class="free-features">
-      <li><span class="fcheck">✓</span> Oração diária personalizada em texto</li>
-      <li><span class="fcheck">✓</span> Enviada às 6h direto no WhatsApp</li>
-      <li><span class="fcheck">✓</span> Personalizada para sua necessidade</li>
-      <li><span class="fcheck">✓</span> Sem cartão de crédito necessário</li>
-    </ul>
-    <a id="btn-gratis" href="#" class="btn-free">
-      🙏 Começar Gratuitamente
-      <span class="btn-free-sub">7 dias grátis • sem compromisso</span>
-    </a>
-  </div>
-</div>
-
-<!-- ── Divisor ── -->
-<div class="divider"><span>ou assine direto com 7 dias grátis incluídos</span></div>
-
 <!-- ── Plan Cards ── -->
 <div class="plans">
 
@@ -369,13 +265,6 @@
   const params = new URLSearchParams(location.search);
   const wa   = params.get('wa')   || '';
   const nome = params.get('nome') || '';
-
-  // Botão gratuito — aponta para cadastro.apicesystem.shop
-  const btnGratis = document.getElementById('btn-gratis');
-  const cadastroUrl = 'https://cadastro.apicesystem.shop'
-    + (wa   ? '?wa='   + encodeURIComponent(wa)   : '')
-    + (wa && nome ? '&nome=' + encodeURIComponent(nome) : (!wa && nome ? '?nome=' + encodeURIComponent(nome) : ''));
-  btnGratis.href = cadastroUrl;
 
   // Personalizar header se tiver nome
   if (nome) {
