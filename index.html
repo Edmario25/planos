@@ -159,7 +159,7 @@
 <div class="header">
   <div class="logo"><div class="cross"></div></div>
   <h1>Orações Diárias</h1>
-  <p>Orações católicas personalizadas todo dia, direto no seu WhatsApp 🙏</p>
+  <p>Receba uma oração personalizada todos os dias, direto no seu WhatsApp 🙏</p>
 </div>
 
 <!-- ── Plan Cards ── -->
@@ -170,7 +170,7 @@
     <div class="card-top">
       <div class="plan-icon icon-basico">📖</div>
       <div class="plan-info">
-        <div class="plan-name">Básico</div>
+        <div class="plan-name">Plano Oração</div>
         <div class="plan-price">
           <span class="price-value">R$9,90</span>
           <span class="price-period">/mês</span>
@@ -186,17 +186,16 @@
     </ul>
     <button class="btn-assinar btn-basico" onclick="assinar('basico', this)">
       <span class="spinner" id="spinner-basico"></span>
-      <span class="btn-label">Assinar Básico</span>
+      <span class="btn-label">Quero começar</span>
     </button>
   </div>
 
   <!-- PREMIUM (featured) -->
   <div class="card featured">
-    <span class="badge-popular">⭐ Mais Completo</span>
     <div class="card-top">
       <div class="plan-icon icon-premium">🎙️</div>
       <div class="plan-info">
-        <div class="plan-name">Premium</div>
+        <div class="plan-name">Plano Contemplação</div>
         <div class="plan-price">
           <span class="price-value">R$19,90</span>
           <span class="price-period">/mês</span>
@@ -212,7 +211,7 @@
     </ul>
     <button class="btn-assinar btn-premium" onclick="assinar('premium', this)">
       <span class="spinner" id="spinner-premium"></span>
-      <span class="btn-label">Assinar Premium</span>
+      <span class="btn-label">Quero este plano</span>
     </button>
   </div>
 
@@ -221,7 +220,7 @@
     <div class="card-top">
       <div class="plan-icon icon-plus">✨</div>
       <div class="plan-info">
-        <div class="plan-name">Plus</div>
+        <div class="plan-name">Plano Jornada</div>
         <div class="plan-price">
           <span class="price-value">R$29,90</span>
           <span class="price-period">/mês</span>
@@ -237,7 +236,7 @@
     </ul>
     <button class="btn-assinar btn-plus" onclick="assinar('plus', this)">
       <span class="spinner" id="spinner-plus"></span>
-      <span class="btn-label">Assinar Plus</span>
+      <span class="btn-label">Quero este plano</span>
     </button>
   </div>
 
@@ -249,7 +248,7 @@
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
     </svg>
-    Pagamento 100% seguro via Mercado Pago • Cancele quando quiser
+    🔒 Pagamento seguro • PIX, Boleto ou Cartão • Cancele a qualquer momento
   </span>
 </div>
 
@@ -269,7 +268,7 @@
   // Personalizar header se tiver nome
   if (nome) {
     const p = document.querySelector('.header p');
-    p.textContent = 'Olá, ' + decodeURIComponent(nome) + '! Escolha como quer começar 🙏';
+    p.textContent = 'Olá, ' + decodeURIComponent(nome) + '! Que bom ter você aqui 🙏';
   }
 
   // ── Checkout pago ──
@@ -286,13 +285,13 @@
       const res = await fetch('https://n8n.apicesystem.shop/webhook/criar-checkout', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ plano, whatsapp: wa, nome })
+        body: JSON.stringify({ plano, whatsapp: wa, nome, origem: 'planos' })
       });
 
       if (!res.ok) throw new Error('HTTP ' + res.status);
 
       const data = await res.json();
-      const url  = data.checkout_url || data.init_point;
+      const url  = data.checkout_url;
 
       if (!url) throw new Error('Sem URL de checkout');
 
@@ -308,8 +307,7 @@
   }
 
   function textoBtn(plano) {
-    return plano === 'basico'   ? 'Assinar Básico'   :
-           plano === 'premium'  ? 'Assinar Premium'  : 'Assinar Plus';
+    return 'Quero este plano';
   }
 
   function showError() {
